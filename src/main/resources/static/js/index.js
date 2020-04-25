@@ -11,6 +11,7 @@ function init() {
 
 function kubelistPodForAllNamespaces(){
     $('#test').empty();
+    $('#title').empty();
     $.ajax({
             url : 'kubelistPodForAllNamespaces',
             type : 'post',
@@ -19,14 +20,15 @@ function kubelistPodForAllNamespaces(){
                 if(data){
                 var tempHtml = "";
                 $(data).each(function(i, value) {
-                   //var val1= value.replace(/[/g,"");
-                    var val = value.split(",");
+                    value1 = value.replace(/\[|]/g,'');
+                    var val = value1.split(",");
                     tempHtml +="<tr>";
-                    tempHtml +=" <td>'" + val[0] + "'</td>";
-                    tempHtml +=" <td>'" + val[1] + "'</td>";
-                    tempHtml +=" <td>'" + val[2] + "'</td>";
+                    tempHtml +=" <td width='30%'>'" + val[0] + "'</td>";
+                    tempHtml +=" <td width='30%'>'" + val[1] + "'</td>";
+                    tempHtml +=" <td width='30%'>'" + val[2] + "'</td>";
                     tempHtml +="</tr>";
                 })
+                $('#title').load("html/allPod.html");
                 $('#test').append(tempHtml);
               }
             },
@@ -36,6 +38,7 @@ function kubelistPodForAllNamespaces(){
 
 function kubelistNamespace(){
     $('#test').empty();
+    $('#title').empty();
     $.ajax({
             url : 'kubelistNamespace',
             type : 'post',
@@ -50,6 +53,31 @@ function kubelistNamespace(){
                     tempHtml +="</tr>";
                 })
                 $('#test').append(tempHtml);
+                $('#title').load("html/allNamespaces.html");
+              }
+            },
+
+        })
+}
+
+function kubelistNamespace(){
+    $('#test').empty();
+    $('#title').empty();
+    $.ajax({
+            url : 'kubelistNode',
+            type : 'post',
+            dataType : 'json',
+            success : function(data) {
+                if(data){
+                var tempHtml = "";
+                $(data).each(function(index, val) {
+                    val = val.replace(/'/g,"");
+                    tempHtml +="<tr>";
+                    tempHtml +=" <td>'" + val + "'</td>";
+                    tempHtml +="</tr>";
+                })
+                $('#test').append(tempHtml);
+                $('#title').load("html/allNodes.html");
               }
             },
 

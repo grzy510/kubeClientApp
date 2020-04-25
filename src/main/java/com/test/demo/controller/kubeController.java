@@ -32,7 +32,7 @@ public class kubeController {
         //将加载config的client设置为默认的client
         Configuration.setDefaultApiClient(client);
     }
-
+    //取pods
     @RequestMapping("/kubelistPodForAllNamespaces")
     public ArrayList<String> kubelistPodForAllNamespaces() throws  ApiException {
 
@@ -40,12 +40,20 @@ public class kubeController {
         ArrayList<String> returnData = kc.kubelistPodForAllNamespaces();
         return returnData;
     }
-
+    //取namespaces
     @RequestMapping("/kubelistNamespace")
     public ArrayList<String> kubekubelistNamespace() throws  ApiException {
 
         kubeClient kc = new kubeClient();
         ArrayList<String> returnData = kc.kubelistNamespace();
+        return returnData;
+    }
+    //取nodes
+    @RequestMapping("/kubelistNode")
+    public ArrayList<String> kubelistNode() throws  ApiException {
+
+        kubeClient kc = new kubeClient();
+        ArrayList<String> returnData = kc.kubelistNode();
         return returnData;
     }
 
@@ -54,7 +62,7 @@ public class kubeController {
     public static void main(String [] args) throws ApiException, IOException, ApiException {
         kubeController tk = new kubeController();
         tk.kubeInit();
-        tk.kubelistPodForAllNamespaces();
+        tk.kubelistNode();
 
 
     }

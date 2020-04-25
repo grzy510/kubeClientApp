@@ -4,10 +4,7 @@ import io.kubernetes.client.openapi.ApiClient;
 import io.kubernetes.client.openapi.ApiException;
 import io.kubernetes.client.openapi.Configuration;
 import io.kubernetes.client.openapi.apis.CoreV1Api;
-import io.kubernetes.client.openapi.models.V1Namespace;
-import io.kubernetes.client.openapi.models.V1NamespaceList;
-import io.kubernetes.client.openapi.models.V1Pod;
-import io.kubernetes.client.openapi.models.V1PodList;
+import io.kubernetes.client.openapi.models.*;
 import io.kubernetes.client.util.ClientBuilder;
 import io.kubernetes.client.util.KubeConfig;
 
@@ -19,7 +16,6 @@ public class kubeClient {
     public ArrayList<String> kubelistPodForAllNamespaces() throws  ApiException
     {
         ArrayList<String> baseData = new ArrayList<String>();
-
         ArrayList<String> data = new ArrayList<String>();
         //创建一个api
         CoreV1Api api = new CoreV1Api();
@@ -35,7 +31,7 @@ public class kubeClient {
 
         return data;
     }
-
+    //获取所有namespace
     public ArrayList<String> kubelistNamespace() throws  ApiException
     {
         ArrayList<String> data = new ArrayList<String>();
@@ -47,6 +43,24 @@ public class kubeClient {
             data.add(item.getMetadata().getName());
             System.out.println(item.getMetadata().getName());
         }
+        return data;
+    }
+
+    public ArrayList<String> kubelistNode() throws  ApiException
+    {
+        ArrayList<String> baseData = new ArrayList<String>();
+        ArrayList<String> data = new ArrayList<String>();
+        //创建一个api
+        CoreV1Api api = new CoreV1Api();
+        //打印所有的pod
+        V1NodeList list = api.listNode(null, null, null, null, null, null, null, null, null);
+        for (V1Node item : list.getItems()) {
+            baseData.add(item.getMetadata().getName());
+            //baseData.add(item.getStatus().phase());
+            data.add(baseData.toString());
+            baseData.clear();
+        }
+        System.out.println(data);
         return data;
     }
 }
