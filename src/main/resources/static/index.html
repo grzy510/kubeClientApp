@@ -1,10 +1,34 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="utf-8">
+    <title>获取POD列表</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
 </head>
-<body>
-test sucessful!
+<body onload="init()">
+
+<table class="table table-striped">
+    <caption>TEST</caption>
+    <thead>
+    <tr>
+        <th>pod名</th>
+        <th>状态</th>
+        <th>邮编</th>
+    </tr>
+    </thead>
+    <tbody id="test">
+    </tbody>
+</table>
+
+<div style="background-color:#ADADAD;">
+
+</div>
+<div class="col-sm-offset-2 col-sm-10">
+    <button type="button" class="btn btn-default" onclick="kubelistPodForAllNamespaces()">获取所有pod</button>
+    <button type="button" class="btn btn-default" onclick="kubelistNamespace()">获取所有namespace</button>
+</div>
 </body>
 </html>
