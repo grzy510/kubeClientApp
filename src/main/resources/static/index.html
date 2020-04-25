@@ -11,12 +11,15 @@
 <body onload="init()">
 
 <table class="table table-striped">
-    <caption>TEST</caption>
+    <caption>
+        <button type="button" class="btn btn-default" onclick="kubelistPodForAllNamespaces()">获取所有pod</button>
+        <button type="button" class="btn btn-default" onclick="kubelistNamespace()">获取所有namespace</button>
+    </caption>
     <thead>
     <tr>
         <th>pod名</th>
+        <th>命名空间</th>
         <th>状态</th>
-        <th>邮编</th>
     </tr>
     </thead>
     <tbody id="test">
@@ -27,8 +30,7 @@
 
 </div>
 <div class="col-sm-offset-2 col-sm-10">
-    <button type="button" class="btn btn-default" onclick="kubelistPodForAllNamespaces()">获取所有pod</button>
-    <button type="button" class="btn btn-default" onclick="kubelistNamespace()">获取所有namespace</button>
+
 </div>
 </body>
 </html>

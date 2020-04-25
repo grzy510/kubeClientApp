@@ -10,6 +10,7 @@ function init() {
 }
 
 function kubelistPodForAllNamespaces(){
+    $('#test').empty();
     $.ajax({
             url : 'kubelistPodForAllNamespaces',
             type : 'post',
@@ -17,10 +18,13 @@ function kubelistPodForAllNamespaces(){
             success : function(data) {
                 if(data){
                 var tempHtml = "";
-                $(data).each(function(index, val) {
-                    val = val.replace(/'/g,"");
+                $(data).each(function(i, value) {
+                   //var val1= value.replace(/[/g,"");
+                    var val = value.split(",");
                     tempHtml +="<tr>";
-                    tempHtml +=" <td>'" + val + "'</td>";
+                    tempHtml +=" <td>'" + val[0] + "'</td>";
+                    tempHtml +=" <td>'" + val[1] + "'</td>";
+                    tempHtml +=" <td>'" + val[2] + "'</td>";
                     tempHtml +="</tr>";
                 })
                 $('#test').append(tempHtml);
@@ -31,6 +35,7 @@ function kubelistPodForAllNamespaces(){
 }
 
 function kubelistNamespace(){
+    $('#test').empty();
     $.ajax({
             url : 'kubelistNamespace',
             type : 'post',
