@@ -10,6 +10,8 @@ import io.kubernetes.client.openapi.models.V1PodList;
 import io.kubernetes.client.util.ClientBuilder;
 import io.kubernetes.client.util.KubeConfig;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.FileReader;
@@ -17,6 +19,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import com.test.demo.client.kubeClient;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 @RestController
 public class kubeController {
@@ -35,7 +40,6 @@ public class kubeController {
     //取pods
     @RequestMapping("/kubelistPodForAllNamespaces")
     public ArrayList<String> kubelistPodForAllNamespaces() throws  ApiException {
-
         kubeClient kc = new kubeClient();
         ArrayList<String> returnData = kc.kubelistPodForAllNamespaces();
         return returnData;
@@ -43,7 +47,6 @@ public class kubeController {
     //取namespaces
     @RequestMapping("/kubelistNamespace")
     public ArrayList<String> kubekubelistNamespace() throws  ApiException {
-
         kubeClient kc = new kubeClient();
         ArrayList<String> returnData = kc.kubelistNamespace();
         return returnData;
@@ -51,19 +54,38 @@ public class kubeController {
     //取nodes
     @RequestMapping("/kubelistNode")
     public ArrayList<String> kubelistNode() throws  ApiException {
-
         kubeClient kc = new kubeClient();
         ArrayList<String> returnData = kc.kubelistNode();
         return returnData;
     }
+    //创建namespace
+    @RequestMapping("/kubeCreateNamespace")
+    public ArrayList<String> kubeCreateNamespace(HttpServletRequest request,HttpServletResponse response) throws  ApiException {
+
+        kubeClient kc = new kubeClient();
+        String str_namespace = request.getParameter("namespace");
+        System.out.println("创建namespace请求："+str_namespace);
+        ArrayList<String> returnData = kc.kubeCreateNamespace(str_namespace);
+        return returnData;
+    }
+    //创建namespace
+    @RequestMapping("/kubecreatePod")
+    public ArrayList<String> kubecreatePod(HttpServletRequest request,HttpServletResponse response) throws  ApiException {
+
+        kubeClient kc = new kubeClient();
+        String str_pod = request.getParameter("pod");
+        System.out.println("创建pod请求："+str_pod);
+        ArrayList<String> returnData = kc.kubeCreatePod(str_pod);
+        return returnData;
+    }
 
 
-
-    public static void main(String [] args) throws ApiException, IOException, ApiException {
+    public static void main(String [] args) throws  IOException, ApiException {
         kubeController tk = new kubeController();
         tk.kubeInit();
-        tk.kubelistNode();
-
+        kubeClient kc = new kubeClient();
+        //String returnData = kc.kubeCreateNamespace("ddddd");
+        //System.out.println(returnData);
 
     }
 }

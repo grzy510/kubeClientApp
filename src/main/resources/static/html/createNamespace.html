@@ -1,0 +1,34 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+
+<tr>
+
+    <th><label>namespace</label></th>
+    <th width="30%"><input type="text" class="form-control" id="str_namespace" placeholder="输入namespace名"></th>
+    <th><button type="submit" class="btn btn-default" onclick="kubeCreateNamespace()">创建</button></th>
+
+</tr>
+
+
+</body>
+
+<script>
+function kubeCreateNamespace()
+{
+         $.ajax({
+            url : 'kubeCreateNamespace',
+            type : 'post',
+            dataType : 'json',
+            data:{namespace: $("#str_namespace").val()},
+            success : function(data) {
+                if(data){
+                var sucess = data;
+                $('#test').append(sucess);
+              }
+            },
+        })
+}
+</script>

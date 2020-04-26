@@ -1,0 +1,39 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+
+<tr>
+    <th width="30%"><input type="text" class="form-control" id="str_name" placeholder="输入名称"></th>
+    <th width="30%"><input type="text" class="form-control" id="str_replicas" placeholder="容器副本数量"></th>
+    <th width="30%"><input type="text" class="form-control" id="str_namespace" placeholder="指定命名空间"></th>
+    <th width="30%"><input type="text" class="form-control" id="str_volume" placeholder="数据持久化容量"></th>
+    <th><button type="submit" class="btn btn-default" onclick="kubeCreatePod()">创建</button></th>
+
+</tr>
+
+
+</body>
+
+<script>
+function kubeCreatePod()
+{
+         $.ajax({
+            url : 'kubeCreatePod',
+            type : 'post',
+            dataType : 'json',
+            data:{podName: $("#str_name").val(),
+                podReplicas: $("#str_replicas").val(),
+                podNamespace: $("#str_namespace").val(),
+                podVolume: $("#str_volume").val()
+            },
+            success : function(data) {
+                if(data){
+                var sucess = data;
+                $('#test').append(sucess);
+              }
+            },
+        })
+}
+</script>

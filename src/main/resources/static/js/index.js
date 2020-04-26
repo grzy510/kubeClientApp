@@ -5,6 +5,7 @@ function init() {
         dataType : 'json',
         success : function(data) {
 
+
         }
     })
 }
@@ -28,7 +29,7 @@ function kubelistPodForAllNamespaces(){
                     tempHtml +=" <td width='30%'>'" + val[2] + "'</td>";
                     tempHtml +="</tr>";
                 })
-                $('#title').load("html/allPod.html");
+                $('#title').load("html/allPods.html");
                 $('#test').append(tempHtml);
               }
             },
@@ -60,7 +61,7 @@ function kubelistNamespace(){
         })
 }
 
-function kubelistNamespace(){
+function kubelistNode(){
     $('#test').empty();
     $('#title').empty();
     $.ajax({
@@ -82,4 +83,18 @@ function kubelistNamespace(){
             },
 
         })
+}
+
+function kubeLoadCreateNamespace(){
+    $('#test').empty();
+    $('#title').empty();
+    $('#title').load("html/createNamespace.html");
+    //$('#test').load("html/createNamespace.html");
+}
+
+function kubeLoadCreatePod(){
+    $('#test').empty();
+    $('#title').empty();
+    $('#title').load("html/createPod.html");
+    //$('#test').load("html/createNamespace.html");
 }

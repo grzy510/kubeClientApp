@@ -45,7 +45,7 @@ public class kubeClient {
         }
         return data;
     }
-
+    //获取所有Node
     public ArrayList<String> kubelistNode() throws  ApiException
     {
         ArrayList<String> baseData = new ArrayList<String>();
@@ -63,4 +63,60 @@ public class kubeClient {
         System.out.println(data);
         return data;
     }
+    //创建一个Namespace
+    public ArrayList<String> kubeCreateNamespace(String str_namespace) throws  ApiException
+    {
+        ArrayList<String> data = new ArrayList<String>();
+        V1Namespace body = new V1Namespace();
+        V1ObjectMeta vm = new V1ObjectMeta();
+        vm.setName(str_namespace);
+        body.setMetadata(vm);
+        String pretty = "pretty_example";
+        String dryRun = null;
+        String fieldManager = "fieldManager_example";
+        //创建一个api
+        CoreV1Api api = new CoreV1Api();
+        try {
+            body = api.createNamespace(body, pretty, dryRun, fieldManager);
+            System.out.println(body);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling CoreV1Api#createNamespace");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            System.err.println("Response headers: " + e.getResponseHeaders());
+            e.printStackTrace();
+        }
+        data.add(body.toString());
+        System.out.println(body.toString());
+        return data;
+    }
+    //创建一个Namespace
+    public ArrayList<String> kubeCreatePod(String str_namespace) throws  ApiException
+    {
+        ArrayList<String> data = new ArrayList<String>();
+        V1Pod body = new V1Pod();
+        V1ObjectMeta vm = new V1ObjectMeta();
+        vm.setName(str_namespace);
+        body.setMetadata(vm);
+        String pretty = "pretty_example";
+        String dryRun = null;
+        String fieldManager = "fieldManager_example";
+        //创建一个api
+        CoreV1Api api = new CoreV1Api();
+        try {
+            body = api.createNamespacedPod("test-namespace",body,pretty,dryRun,fieldManager);
+            System.out.println(body);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling CoreV1Api#createNamespace");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            System.err.println("Response headers: " + e.getResponseHeaders());
+            e.printStackTrace();
+        }
+        data.add(body.toString());
+        System.out.println(body.toString());
+        return data;
+    }
+
+
 }
