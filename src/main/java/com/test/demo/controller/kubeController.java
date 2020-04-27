@@ -73,9 +73,12 @@ public class kubeController {
     public ArrayList<String> kubecreatePod(HttpServletRequest request,HttpServletResponse response) throws  ApiException {
 
         kubeClient kc = new kubeClient();
-        String str_pod = request.getParameter("pod");
-        System.out.println("创建pod请求："+str_pod);
-        ArrayList<String> returnData = kc.kubeCreatePod(str_pod);
+        String podName = request.getParameter("podName");
+        String podReplicas = request.getParameter("podReplicas");
+        String podNamespace = request.getParameter("podNamespace");
+        String podVolume = request.getParameter("podVolume");
+        System.out.println("创建pod请求："+podName);
+        ArrayList<String> returnData = kc.kubeCreatePod(podName,podReplicas,podNamespace,podVolume);
         return returnData;
     }
 

@@ -3,6 +3,7 @@ package com.test.demo.client;
 import io.kubernetes.client.openapi.ApiClient;
 import io.kubernetes.client.openapi.ApiException;
 import io.kubernetes.client.openapi.Configuration;
+import io.kubernetes.client.openapi.apis.AppsV1Api;
 import io.kubernetes.client.openapi.apis.CoreV1Api;
 import io.kubernetes.client.openapi.models.*;
 import io.kubernetes.client.util.ClientBuilder;
@@ -67,15 +68,18 @@ public class kubeClient {
     public ArrayList<String> kubeCreateNamespace(String str_namespace) throws  ApiException
     {
         ArrayList<String> data = new ArrayList<String>();
-        V1Namespace body = new V1Namespace();
-        V1ObjectMeta vm = new V1ObjectMeta();
-        vm.setName(str_namespace);
-        body.setMetadata(vm);
+        V1Namespace body = new V1NamespaceBuilder()
+                .withMetadata((new V1ObjectMetaBuilder()
+                        .withName(str_namespace)
+                        .build()))
+                .build();
+
         String pretty = "pretty_example";
         String dryRun = null;
         String fieldManager = "fieldManager_example";
         //创建一个api
         CoreV1Api api = new CoreV1Api();
+
         try {
             body = api.createNamespace(body, pretty, dryRun, fieldManager);
             System.out.println(body);
@@ -90,22 +94,25 @@ public class kubeClient {
         System.out.println(body.toString());
         return data;
     }
-    //创建一个Namespace
-    public ArrayList<String> kubeCreatePod(String str_namespace) throws  ApiException
+    //创建一个Pod
+    public ArrayList<String> kubeCreatePod(String podName,String podReplicas,String podNamespace,String podVolume) throws  ApiException
     {
         ArrayList<String> data = new ArrayList<String>();
-        V1Pod body = new V1Pod();
-        V1ObjectMeta vm = new V1ObjectMeta();
-        vm.setName(str_namespace);
-        body.setMetadata(vm);
+        V1Deployment vp = new V1DeploymentBuilder()
+                .withMetadata(new V1ObjectMetaBuilder()
+                        .withName(podName)
+                        .withNamespace(podNamespace).build())
+                .withSpec(new V1DeploymentSpecBuilder()
+                        .withReplicas(Integer.parseInt(podReplicas)).build()).build();
+
         String pretty = "pretty_example";
         String dryRun = null;
         String fieldManager = "fieldManager_example";
         //创建一个api
-        CoreV1Api api = new CoreV1Api();
+        AppsV1Api api = new AppsV1Api();
         try {
-            body = api.createNamespacedPod("test-namespace",body,pretty,dryRun,fieldManager);
-            System.out.println(body);
+            vp = api.createNamespacedDeployment("test-namespace",vp,pretty,dryRun,fieldManager);
+            System.out.println(vp);
         } catch (ApiException e) {
             System.err.println("Exception when calling CoreV1Api#createNamespace");
             System.err.println("Status code: " + e.getCode());
@@ -113,8 +120,8 @@ public class kubeClient {
             System.err.println("Response headers: " + e.getResponseHeaders());
             e.printStackTrace();
         }
-        data.add(body.toString());
-        System.out.println(body.toString());
+        data.add(vp.toString());
+        System.out.println(vp.toString());
         return data;
     }
 

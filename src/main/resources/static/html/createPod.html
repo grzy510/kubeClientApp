@@ -5,11 +5,15 @@
 <body>
 
 <tr>
+    <th><label>名称</label></th>
     <th width="30%"><input type="text" class="form-control" id="str_name" placeholder="输入名称"></th>
+    <th><label>容器副本数量</label></th>
     <th width="30%"><input type="text" class="form-control" id="str_replicas" placeholder="容器副本数量"></th>
+    <th><label>指定命名空间</label></th>
     <th width="30%"><input type="text" class="form-control" id="str_namespace" placeholder="指定命名空间"></th>
+    <th><label>数据持久化容量</label></th>
     <th width="30%"><input type="text" class="form-control" id="str_volume" placeholder="数据持久化容量"></th>
-    <th><button type="submit" class="btn btn-default" onclick="kubeCreatePod()">创建</button></th>
+    <th><button type="submit" class="btn btn-default" onclick="kubecreatePod()">创建</button></th>
 
 </tr>
 
@@ -17,10 +21,10 @@
 </body>
 
 <script>
-function kubeCreatePod()
+function kubecreatePod()
 {
          $.ajax({
-            url : 'kubeCreatePod',
+            url : 'kubecreatePod',
             type : 'post',
             dataType : 'json',
             data:{podName: $("#str_name").val(),
