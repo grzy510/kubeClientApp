@@ -6,6 +6,27 @@
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>
+        function login() {
+            $.ajax({
+                url : 'queryLoginInfo',
+                type : 'post',
+                dataType : 'json',
+                data :{
+                    usrename :$('#username').val(),
+                    password : $('#password').val()
+                },
+                success : function (data) {
+                    if (data)
+                    {
+                        $('#status').append('登录成功');
+                    }
+
+                }
+
+            })
+        }
+    </script>
 </head>
 <body>
 
@@ -28,39 +49,11 @@
         <div class="modal-footer">
             <div class="form-group">
                 <button type="button" class="btn btn-primary form-control" onclick="login()">登录</button>
+                <h1 id="status"></h1>
             </div>
-
-
         </div>
-    </div><!-- /.modal-content -->
-</div><!-- /.modal -->
+    </div>
+</div>
 </body>
+
 </html>
-<script>
-function  login() {
-    var username = $('#username').val();
-    var password = $('#password').val();
-    $.ajax({
-        uri : queryLoginInfo,
-        type : post,
-        dataType :json,
-        data :{
-            usrename :username,
-            password :password
-        },
-        success: function (data) {
-            if(data)
-            {
-                $('#status').append('登录成功');
-
-            }
-
-
-        }
-
-    })
-
-
-}
-
-</script>

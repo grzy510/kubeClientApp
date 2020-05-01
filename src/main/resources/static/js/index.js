@@ -102,6 +102,6 @@ function kubeLoadCreatePod(){
 function kubeLogin(){
     $('#test').empty();
     $('#title').empty();
-    $('#title').load("html/login.html");
+    $('#title').load("login.html");
     //$('#test').load("html/createNamespace.html");
 }
