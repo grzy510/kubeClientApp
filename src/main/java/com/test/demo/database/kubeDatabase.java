@@ -15,6 +15,13 @@ public class kubeDatabase {
     static final String USER = "root";
     static final String PASS = "123456";
 
+    public ArrayList<String> queryLoginInfo()
+    {
+        ArrayList<String> result= new ArrayList<String>();
+        result.add("pass");
+        return result;
+    }
+
     public static void main(String []args)
     {
         Connection conn = null;

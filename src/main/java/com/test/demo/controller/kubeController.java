@@ -1,5 +1,6 @@
 package com.test.demo.controller;
 
+import com.test.demo.database.kubeDatabase;
 import io.kubernetes.client.openapi.ApiClient;
 import io.kubernetes.client.openapi.ApiException;
 import io.kubernetes.client.openapi.Configuration;
@@ -81,6 +82,16 @@ public class kubeController {
         ArrayList<String> returnData = kc.kubeCreatePod(podName,podReplicas,podNamespace,podVolume);
         return returnData;
     }
+    @RequestMapping("/queryLoginInfo")
+    public ArrayList<String> queryLoginInfo(HttpServletRequest request,HttpServletResponse response){
+
+        kubeDatabase kd = new kubeDatabase();
+        ArrayList<String> result = kd.queryLoginInfo();
+
+        return result;
+
+    }
+
 
 
     public static void main(String [] args) throws  IOException, ApiException {

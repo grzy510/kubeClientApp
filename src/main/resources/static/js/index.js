@@ -98,3 +98,10 @@ function kubeLoadCreatePod(){
     $('#title').load("html/createPod.html");
     //$('#test').load("html/createNamespace.html");
 }
+
+function kubeLogin(){
+    $('#test').empty();
+    $('#title').empty();
+    $('#title').load("html/login.html");
+    //$('#test').load("html/createNamespace.html");
+}
