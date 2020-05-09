@@ -27,16 +27,24 @@ import javax.servlet.http.HttpServletResponse;
 @RestController
 public class kubeController {
 
+
     //k8s连接初始化
     @RequestMapping("/init")
-    public void kubeInit() throws IOException
+    public String kubeInit() throws IOException
     {
-        //直接写config path
-        String kubeConfigPath = "C:\\Users\\yanxiao\\Desktop\\demo\\config";
-        //加载k8s, config
-        ApiClient client = ClientBuilder.kubeconfig(KubeConfig.loadKubeConfig(new FileReader(kubeConfigPath))).build();
-        //将加载config的client设置为默认的client
-        Configuration.setDefaultApiClient(client);
+        try{
+            //直接写config path
+            String kubeConfigPath = "C:\\Users\\yanxiao\\Desktop\\demo\\config";
+            //加载k8s, config
+            ApiClient client = ClientBuilder.kubeconfig(KubeConfig.loadKubeConfig(new FileReader(kubeConfigPath))).build();
+            //将加载config的client设置为默认的client
+            Configuration.setDefaultApiClient(client);
+        }catch (IOException ie){
+            ie.printStackTrace();
+            return "init fail!";
+        }
+
+        return "init sucess!";
     }
     //取pods
     @RequestMapping("/kubelistPodForAllNamespaces")
@@ -86,6 +94,10 @@ public class kubeController {
     public ArrayList<String> queryLoginInfo(HttpServletRequest request,HttpServletResponse response){
 
         kubeDatabase kd = new kubeDatabase();
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        System.out.println(username);
+        System.out.println(password);
         ArrayList<String> result = kd.queryLoginInfo();
 
         return result;

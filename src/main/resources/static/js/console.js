@@ -1,13 +1,18 @@
 function init() {
+    $('#title').empty();
+    $('#title').append("k8s初始化中");
     $.ajax({
         url : 'init',
         type : 'post',
         dataType : 'json',
         success : function(data) {
-
-
-        }
-    })
+             if(data){
+                 alert(data);
+                 $('#title').empty();
+                 $('#title').append("k8s加载完成");
+                     }
+                                 }
+           })
 }
 
 function kubelistPodForAllNamespaces(){
@@ -102,6 +107,6 @@ function kubeLoadCreatePod(){
 function kubeLogin(){
     $('#test').empty();
     $('#title').empty();
-    $('#title').load("login.html");
+    $('#title').load("index.html");
     //$('#test').load("html/createNamespace.html");
 }

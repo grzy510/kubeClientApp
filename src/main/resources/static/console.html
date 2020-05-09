@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>获取POD列表</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/console.js"></script>
+</head>
+<body onload="init()">
+
+<table class="table table-striped">
+    <caption>
+        <button type="button" class="btn btn-default" onclick="kubelistPodForAllNamespaces()">查看pods</button>
+        <button type="button" class="btn btn-default" onclick="kubelistNamespace()">查看namespaces</button>
+        <button type="button" class="btn btn-default" onclick="kubelistNode()">查看nodes</button>
+        <button type="button" class="btn btn-default" onclick="kubeLoadCreateNamespace()">创建namespaces</button>
+        <button type="button" class="btn btn-default" onclick="kubeLoadCreatePod()">创建Node</button>
+        <button type="button" class="btn btn-default" onclick="kubeLogin()">登录</button>
+    </caption>
+    <thead id="title">
+
+    </thead>
+    <tbody id="test">
+    </tbody>
+</table>
+
+<div style="background-color:#ADADAD;">
+
+</div>
+<div class="col-sm-offset-2 col-sm-10">
+
+</div>
+</body>
+</html>
