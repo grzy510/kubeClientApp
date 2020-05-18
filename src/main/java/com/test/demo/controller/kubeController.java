@@ -34,7 +34,7 @@ public class kubeController {
     {
         try{
             //直接写config path
-            String kubeConfigPath = "C:\\Users\\yanxiao\\Desktop\\demo\\config";
+            String kubeConfigPath = "config";
             //加载k8s, config
             ApiClient client = ClientBuilder.kubeconfig(KubeConfig.loadKubeConfig(new FileReader(kubeConfigPath))).build();
             //将加载config的client设置为默认的client
