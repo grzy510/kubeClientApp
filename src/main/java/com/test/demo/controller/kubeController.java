@@ -4,19 +4,16 @@ import com.test.demo.database.kubeDatabase;
 import io.kubernetes.client.openapi.ApiClient;
 import io.kubernetes.client.openapi.ApiException;
 import io.kubernetes.client.openapi.Configuration;
-import io.kubernetes.client.openapi.apis.CoreV1Api;
-import io.kubernetes.client.openapi.models.V1NamespaceList;
-import io.kubernetes.client.openapi.models.V1Pod;
-import io.kubernetes.client.openapi.models.V1PodList;
+
 import io.kubernetes.client.util.ClientBuilder;
 import io.kubernetes.client.util.KubeConfig;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 import com.test.demo.client.kubeClient;
@@ -34,7 +31,11 @@ public class kubeController {
     {
         try{
             //直接写config path
-            String kubeConfigPath = "/WEB-INF/classes/static/config/config";
+
+            String kubeConfigPath = this.getClass().getClassLoader().getResource("static/config/config").getPath();
+
+            //String kubeConfigPath = this.getClass().getClassLoader().getResource("config/config").getPath();
+            System.out.println(kubeConfigPath);
             //加载k8s, config
             ApiClient client = ClientBuilder.kubeconfig(KubeConfig.loadKubeConfig(new FileReader(kubeConfigPath))).build();
             //将加载config的client设置为默认的client
