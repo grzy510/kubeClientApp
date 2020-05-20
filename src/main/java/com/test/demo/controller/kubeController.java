@@ -92,15 +92,14 @@ public class kubeController {
         return returnData;
     }
     @RequestMapping("/queryLoginInfo")
-    public ArrayList<String> queryLoginInfo(HttpServletRequest request,HttpServletResponse response){
+    public boolean queryLoginInfo(HttpServletRequest request,HttpServletResponse response){
 
         kubeDatabase kd = new kubeDatabase();
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-        System.out.println(username);
-        System.out.println(password);
-        ArrayList<String> result = kd.queryLoginInfo();
-
+        System.out.println("输入账号为:"+username);
+        System.out.println("输入密码为:"+password);
+        boolean result = kd.queryLoginInfo(username,password);
         return result;
 
     }

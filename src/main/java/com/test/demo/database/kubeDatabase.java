@@ -1,12 +1,7 @@
 package com.test.demo.database;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
-
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+
 
 public class kubeDatabase {
 
@@ -15,12 +10,41 @@ public class kubeDatabase {
     static final String USER = "root";
     static final String PASS = "123456";
 
-    public ArrayList<String> queryLoginInfo()
+
+
+    public boolean queryLoginInfo(String username,String password)
     {
-        ArrayList<String> result= new ArrayList<String>();
-        result.add("pass");
+        Connection conn = null;
+        PreparedStatement ppst = null;
+        boolean result = false;
+        try{
+            Class.forName(JDBC_DRIVER);
+            conn = DriverManager.getConnection(DB_URL,USER,PASS);
+
+            StringBuffer sql= new StringBuffer();
+            sql.append("SELECT pwd from userinfo where user = ?");
+            ppst = conn.prepareStatement(sql.toString());
+            ppst.setString(1,username);
+            ResultSet rs = ppst.executeQuery();
+            while(rs.next()){
+                String pwd  = rs.getString("pwd");
+                if(pwd.equals(password))
+                {
+                    System.out.println("账密验证通过");
+                    result =  true;
+                }
+            }
+            rs.close();
+            ppst.close();
+            conn.close();
+        }catch(SQLException se){
+            se.printStackTrace();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
         return result;
     }
+
 
     public static void main(String []args)
     {

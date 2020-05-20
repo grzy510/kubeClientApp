@@ -13,7 +13,7 @@
                 type : 'post',
                 dataType : 'json',
                 data :{
-                    usrename :$('#username').val(),
+                    username :$('#username').val(),
                     password : $('#password').val()
                 },
                 success : function (data) {
@@ -31,7 +31,7 @@
 </head>
 <body>
 
-<div class="modal-dialog" style="margin-top: 10%;">
+<div class="modal-dialog" style="margin-top: 20%;">
     <div class="modal-content">
         <div class="modal-header">
 
@@ -40,11 +40,11 @@
         <div class="modal-body" id = "model-body">
             <div class="form-group">
 
-                <input type="text" class="form-control"placeholder="用户名" autocomplete="off">
+                <input type="text" class="form-control"placeholder="用户名" id="username" autocomplete="off">
             </div>
             <div class="form-group">
 
-                <input type="password" class="form-control" placeholder="密码" autocomplete="off">
+                <input type="password" class="form-control" placeholder="密码" id="password" autocomplete="off">
             </div>
         </div>
         <div class="modal-footer">
