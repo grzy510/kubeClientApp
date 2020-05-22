@@ -7,6 +7,8 @@ import io.kubernetes.client.openapi.Configuration;
 
 import io.kubernetes.client.util.ClientBuilder;
 import io.kubernetes.client.util.KubeConfig;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RestController;
@@ -24,11 +26,13 @@ import javax.servlet.http.HttpServletResponse;
 @RestController
 public class kubeController {
 
+    private static final Logger logger = LoggerFactory.getLogger(kubeController.class);
 
     //k8s连接初始化
     @RequestMapping("/init")
     public String kubeInit() throws IOException
     {
+        logger.info("k8s连接初始化");
         try{
             //直接写config path
 

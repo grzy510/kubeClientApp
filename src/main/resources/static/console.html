@@ -10,21 +10,36 @@
 </head>
 <body onload="init()">
 
-<table class="table table-striped">
-    <caption>
-        <button type="button" class="btn btn-default" onclick="kubelistPodForAllNamespaces()">查看pods</button>
-        <button type="button" class="btn btn-default" onclick="kubelistNamespace()">查看namespaces</button>
-        <button type="button" class="btn btn-default" onclick="kubelistNode()">查看nodes</button>
-        <button type="button" class="btn btn-default" onclick="kubeLoadCreateNamespace()">创建namespaces</button>
-        <button type="button" class="btn btn-default" onclick="kubeLoadCreatePod()">创建Node</button>
-        <button type="button" class="btn btn-default" onclick="kubeLogin()">登录</button>
-    </caption>
-    <thead id="title">
+<div id="maxname" style="width:auto;">
+    <div id="hname" style="background-color:#C0C0C0;">
+        <h1 style="margin-bottom:0;text-align:center;">test</h1>
+    </div>
+    <div id="menu" style="background-color:#FFFFFF;height:200px;width:80px;float:left;">
+        <a href="www.baidu.com" style="float:none">Home</a><br/>
+        num1<br/>
+        num2<br/>
+        num3
+    </div>
+    <div id="content" style="background-color:#FFFFFF;height:200px;width:800px;float:left;">
+        <table class="table table-striped">
+            <caption>
+                <button type="button" class="btn btn-default" onclick="kubelistPodForAllNamespaces()">查看pods</button>
+                <button type="button" class="btn btn-default" onclick="kubelistNamespace()">查看namespaces</button>
+                <button type="button" class="btn btn-default" onclick="kubelistNode()">查看nodes</button>
+                <button type="button" class="btn btn-default" onclick="kubeLoadCreateNamespace()">创建namespaces</button>
+                <button type="button" class="btn btn-default" onclick="kubeLoadCreatePod()">创建Node</button>
+                <button type="button" class="btn btn-default" onclick="kubeLogin()">登录</button>
+            </caption>
+            <thead id="title">
 
-    </thead>
-    <tbody id="test">
-    </tbody>
-</table>
+            </thead>
+            <tbody id="test">
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
 
 <div style="background-color:#ADADAD;">
 
@@ -32,5 +47,6 @@
 <div class="col-sm-offset-2 col-sm-10">
 
 </div>
+
 </body>
 </html>
