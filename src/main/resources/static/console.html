@@ -12,29 +12,29 @@
 
 <div id="maxname" style="width:auto;">
     <div id="hname" style="background-color:#C0C0C0;">
-        <h1 style="margin-bottom:0;text-align:center;">test</h1>
+        <h1 id="banner" style="margin-bottom:0;text-align:center;height:50px">test</h1>
     </div>
-    <div id="menu" style="background-color:#FFFFFF;height:200px;width:80px;float:left;">
-        <a href="www.baidu.com" style="float:none">Home</a><br/>
-        num1<br/>
-        num2<br/>
-        num3
+    <div id="menu" style="background-color:#FFFFFF;height:200px;width:150px;float:left;">
+        <div class="container" style="width:150px">
+            <div class="row">
+                <div class="span2">
+                    <ul class="nav nav-pills nav-stacked">
+                        <li class="active"><a href="index.html">Home</a></li>
+                        <li><a href="#" onclick="kubelistPodForAllNamespaces()">查看pods</a></li>
+                        <li><a href="#" onclick="kubelistNamespace()">查看namespaces </a></li>
+                        <li><a href="#" onclick="kubelistNode()">查看nodes</a></li>
+                        <li><a href="#" onclick="kubeCreateNamespace()">创建namespaces</a></li>
+                        <li><a href="#" onclick="kubeLoadCreatePod()">创建Node</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
-    <div id="content" style="background-color:#FFFFFF;height:200px;width:800px;float:left;">
+    <div id="content" style="background-color:#FFFFFF;height:250px;width:auto;float:left;">
         <table class="table table-striped">
-            <caption>
-                <button type="button" class="btn btn-default" onclick="kubelistPodForAllNamespaces()">查看pods</button>
-                <button type="button" class="btn btn-default" onclick="kubelistNamespace()">查看namespaces</button>
-                <button type="button" class="btn btn-default" onclick="kubelistNode()">查看nodes</button>
-                <button type="button" class="btn btn-default" onclick="kubeLoadCreateNamespace()">创建namespaces</button>
-                <button type="button" class="btn btn-default" onclick="kubeLoadCreatePod()">创建Node</button>
-                <button type="button" class="btn btn-default" onclick="kubeLogin()">登录</button>
-            </caption>
-            <thead id="title">
+            <thead id="title"></thead>
+            <tbody id="test"></tbody>
 
-            </thead>
-            <tbody id="test">
-            </tbody>
         </table>
     </div>
 </div>

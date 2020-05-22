@@ -17,6 +17,9 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import com.test.demo.client.kubeClient;
 
@@ -30,8 +33,9 @@ public class kubeController {
 
     //k8s连接初始化
     @RequestMapping("/init")
-    public String kubeInit() throws IOException
+    public boolean kubeInit() throws IOException
     {
+        boolean result = true;
         logger.info("k8s连接初始化");
         try{
             //直接写config path
@@ -46,10 +50,9 @@ public class kubeController {
             Configuration.setDefaultApiClient(client);
         }catch (IOException ie){
             ie.printStackTrace();
-            return "init fail!";
+            result = false;
         }
-
-        return "init sucess!";
+        return result;
     }
     //取pods
     @RequestMapping("/kubelistPodForAllNamespaces")

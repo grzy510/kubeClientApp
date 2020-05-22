@@ -65,7 +65,7 @@ public class kubeClient {
         V1NodeList list = api.listNode(null, null, null, null, null, null, null, null, null);
         for (V1Node item : list.getItems()) {
             baseData.add(item.getMetadata().getName());
-            //baseData.add(item.getStatus().phase());
+            baseData.add(item.getStatus().getPhase());
             data.add(baseData.toString());
             baseData.clear();
         }
